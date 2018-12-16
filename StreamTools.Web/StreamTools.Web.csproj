@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StreamTools.Web.Abstractions\StreamTools.Web.Abstractions.csproj" />
+    <ProjectReference Include="..\StreamTools.Composition\StreamTools.Composition.csproj" />
   </ItemGroup>
 
   <ItemGroup>

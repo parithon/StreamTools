@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Runtime.Loader;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace StreamTools.Web
@@ -33,13 +34,16 @@ namespace StreamTools.Web
 		[ImportMany]
 		private static IEnumerable<IPluginConfigure> Configurations { get; set; }
 
-		internal static IServiceCollection AddPluginServices(this IServiceCollection services)
+		internal static IServiceCollection AddPluginServices(this IServiceCollection services, IConfiguration config)
 		{
 			Plugins = Container.GetExports<IPluginService>();
 
 			foreach (var plugin in Plugins)
 			{
-				services = plugin.AddService(services);
+				var pluginName = plugin.GetName();
+				var configSection = config.GetSection(pluginName);
+
+				services = plugin.AddService(services, configSection);
 			}
 
 			return services;

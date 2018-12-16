@@ -32,7 +32,7 @@ namespace StreamTools.Web
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 
-			services.AddPluginServices();
+			services.AddPluginServices(Configuration);
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}

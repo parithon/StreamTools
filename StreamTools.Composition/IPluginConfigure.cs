@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace StreamTools.Web
+namespace StreamTools
 {
 	public interface IPluginConfigure
 	{

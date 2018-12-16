@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.Composition", "StreamTools.Composition\StreamTools.Composition.csproj", "{97E127FB-C7F6-48F9-8E2A-5E663D99AF21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.Composition.Abstractions", "StreamTools.Composition.Abstractions\StreamTools.Composition.Abstractions.csproj", "{97E127FB-C7F6-48F9-8E2A-5E663D99AF21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

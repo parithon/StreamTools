@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Anthony Conrad</Authors>
+    <Description>A library that includes the required abstractions streamers use to add plugins to the StreamTools project.</Description>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RootNamespace>StreamTools.Composition</RootNamespace>
   </PropertyGroup>
 
 	<ItemGroup>

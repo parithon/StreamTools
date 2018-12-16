@@ -1,0 +1,28 @@
+{
+  "name": "streamtools-web",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/parithon/StreamTools.git"
+  },
+  "author": "Anthony Conrad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/parithon/StreamTools/issues"
+  },
+  "homepage": "https://github.com/parithon/StreamTools#readme",
+  "devDependencies": {
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-csso": "^3.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-typescript": "^5.0.0",
+    "gulp-uglify": "^3.0.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.2.2"
+  }
+}

@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamTools.Web", "StreamTools.Web\StreamTools.Web.csproj", "{0012E9DD-8129-4614-91B9-E001F0A73114}"
-	ProjectSection(ProjectDependencies) = postProject
-		{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A} = {139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution items", "{8752A7EE-07BD-4AE1-AA57-32338E99F7E0}"
 	ProjectSection(SolutionItems) = preProject
@@ -17,8 +14,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution items", "solution 
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.Web.TwitchPlugin", "StreamTools.Web.TwitchPlugin\StreamTools.Web.TwitchPlugin.csproj", "{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamTools.Web.Abstractions", "StreamTools.Web.Abstractions\StreamTools.Web.Abstractions.csproj", "{888B0BDD-8DB2-4743-9BD1-8642207E193F}"
 EndProject
@@ -32,10 +27,6 @@ Global
 		{0012E9DD-8129-4614-91B9-E001F0A73114}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0012E9DD-8129-4614-91B9-E001F0A73114}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0012E9DD-8129-4614-91B9-E001F0A73114}.Release|Any CPU.Build.0 = Release|Any CPU
-		{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{139AAA7F-AE72-4A0A-BB29-0EA6930BAA2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{888B0BDD-8DB2-4743-9BD1-8642207E193F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{888B0BDD-8DB2-4743-9BD1-8642207E193F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{888B0BDD-8DB2-4743-9BD1-8642207E193F}.Release|Any CPU.ActiveCfg = Release|Any CPU

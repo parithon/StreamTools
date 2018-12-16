@@ -14,9 +14,10 @@ namespace StreamTools.Web
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IHostingEnvironment env)
 		{
 			Configuration = configuration;
+			this.LoadPlugins(env.ContentRootPath);
 		}
 
 		public IConfiguration Configuration { get; }
@@ -30,6 +31,8 @@ namespace StreamTools.Web
 				options.CheckConsentNeeded = context => true;
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
+
+			services.AddPluginServices();
 
 			services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 		}
@@ -51,6 +54,8 @@ namespace StreamTools.Web
 
 			app.UseStaticFiles();
 			app.UseCookiePolicy();
+
+			app.UsePlugins(env);
 
 			app.UseMvc();
 		}

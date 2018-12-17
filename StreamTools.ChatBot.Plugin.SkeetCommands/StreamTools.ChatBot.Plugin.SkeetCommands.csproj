@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Composition.AttributedModel" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StreamTools.ChatBot.Abstractions\StreamTools.ChatBot.Abstractions.csproj" />
+    <ProjectReference Include="..\StreamTools.ChatBot.Composition.Abstractions\StreamTools.ChatBot.Composition.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

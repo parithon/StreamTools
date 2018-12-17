@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StreamTools.Core
+namespace StreamTools.Chatbot
 {
-	public class ChannelInfoEventArgs : EventArgs
+	public class ChannelInfoEventArgs : ChatEventArgs
 	{		
 		public ChannelInfoType Type { get; set; }
 	}

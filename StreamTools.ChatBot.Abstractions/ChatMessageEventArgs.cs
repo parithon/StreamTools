@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StreamTools.Core
+namespace StreamTools.Chatbot
 {
 	public class ChatMessageEventArgs : ChatEventArgs
 	{

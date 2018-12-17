@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+	  <PackageReference Include="Humanizer.Core" Version="2.5.16" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.2.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StreamTools.ChatBot.Abstractions\StreamTools.Chatbot.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SkeetQuotes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+	
+	<ItemGroup>
+		<BuildFiles Include="$(OutDir)*.*" />
+	</ItemGroup>
+
+	<Target Name="CopyToWebProject" AfterTargets="Build">
+		<Copy SourceFiles="@(BuildFiles)" DestinationFolder="$(SolutionDir)StreamTools.ConsoleTools\Plugins\Commands" />
+		<Copy SourceFiles="@(BuildFiles)" DestinationFolder="$(SolutionDir)StreamTools.Web\Plugins\Commands" />
+	</Target>
+</Project>

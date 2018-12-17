@@ -44,13 +44,13 @@ namespace StreamTools.Chatbot
 
 		protected void ConfigureCommandCooldown(TimeSpan? cooldownTimeSpan)
 		{
-			CooldownTimeSpan = cooldownTimeSpan ?? TimeSpan.FromSeconds(30);
+			CooldownTimeSpan = cooldownTimeSpan ?? TimeSpan.FromSeconds(0);
 			_logger.LogInformation($"Cooldown set to {CooldownTimeSpan}");
 		}
 
 		private async Task ProcessChatMessageAsync(IChatService chatService, ChatMessageEventArgs e)
 		{
-			var userkey = $"{e.ServiceName}:{e.UserName}";
+			var userkey = $"{e.ServiceName}:{e.Username}";
 			var user = ActiveUsers.AddOrUpdate(userkey, new ChatUserInfo(), (_, u) => u);
 
 			if (e.Message.FirstOrDefault() == '!')
@@ -61,7 +61,7 @@ namespace StreamTools.Chatbot
 				if (await HandleBasicCommands())
 					return;
 
-				await chatService.SendWhisperAsync(e.UserName, "Unknown command. Try !help for a list of available commands.");
+				await chatService.SendWhisperAsync(e.Username, "Unknown command. Try !help for a list of available commands.");
 			}
 
 			async Task<bool> HandleBasicCommands()
@@ -77,10 +77,13 @@ namespace StreamTools.Chatbot
 
 				foreach (var cmd in Commands)
 				{
-					if (!trigger.Span.Equals(cmd.Trigger.AsSpan(), StringComparison.OrdinalIgnoreCase) || await CommandsTooFast(cmd.Trigger, cmd.Cooldown))
+					if (!trigger.Span.Equals(cmd.Trigger.AsSpan(), StringComparison.OrdinalIgnoreCase))
+						continue;
+
+					if (await CommandsTooFast(cmd.Trigger, cmd.Cooldown))
 						return true;
 
-					await cmd.ExecuteAsync(chatService, e.UserName, rhs, e.IsOwner, e.IsModerator);
+					await cmd.ExecuteAsync(chatService, e.Username, rhs, e.IsOwner, e.IsModerator);
 
 					AfterExecute(cmd.Trigger);
 					return true;
@@ -93,10 +96,10 @@ namespace StreamTools.Chatbot
 			{
 				foreach (var cmd in ExtendedCommands)
 				{
-					if (!cmd.CanExecute(e.UserName, e.Message) || await CommandsTooFast(cmd.Name, cmd.Cooldown))
+					if (!cmd.CanExecute(e.Username, e.Message) || await CommandsTooFast(cmd.Name, cmd.Cooldown))
 						return false;
 
-					await cmd.Execute(chatService, e.UserName, e.Message);
+					await cmd.Execute(chatService, e.Username, e.Message);
 
 					AfterExecute(cmd.Name);
 					return cmd.Handled;
@@ -107,13 +110,10 @@ namespace StreamTools.Chatbot
 
 			async Task<bool> CommandsTooFast(string commandName, TimeSpan? cooldownTimeSpan)
 			{
-				if (e.IsModerator || e.IsOwner)
-					return false;
-
 				if (GetInstant.Minus(user.LastCommandInstant).ToTimeSpan() < CooldownTimeSpan)
 				{
-					_logger.LogInformation($"Ignoring command {commandName} from {e.UserName} on {e.ServiceName}. Cooldown active.");
-					await ProcessCommandsTooFastWhisperAsync(chatService, e.UserName);
+					_logger.LogInformation($"Ignoring command {commandName} from {e.Username} on {e.ServiceName}. Cooldown active.");
+					await ProcessCommandsTooFastWhisperAsync(chatService, e.Username, commandName);
 					return true;
 				}
 
@@ -123,8 +123,8 @@ namespace StreamTools.Chatbot
 					if (now.Minus(dt).ToTimeSpan() < cooldownTimeSpan.GetValueOrDefault())
 					{
 						var remain = cooldownTimeSpan.GetValueOrDefault() - now.Minus(dt).ToTimeSpan();
-						_logger.LogWarning($"Ignoring command {commandName} from {e.UserName} on {e.ServiceName}. Cooldown active for another {remain.TotalSeconds} second(s).");
-						await ProcessCommandsTooFastWhisperAsync(chatService, e.UserName, remain.TotalSeconds);
+						_logger.LogWarning($"Ignoring command {commandName} from {e.Username} on {e.ServiceName}. Cooldown active for another {remain.TotalSeconds} second(s).");
+						await ProcessCommandsTooFastWhisperAsync(chatService, e.Username, commandName, remain.TotalSeconds);
 						return true;
 					}
 				}
@@ -141,25 +141,25 @@ namespace StreamTools.Chatbot
 			}
 		}
 
-		private async Task ProcessCommandsTooFastWhisperAsync(IChatService chatService, string username, double secondsRemaining = 0)
+		private async Task ProcessCommandsTooFastWhisperAsync(IChatService chatService, string username, string commandName,  double secondsRemaining = 0)
 		{
 			var message = secondsRemaining > 0 ?
-				$"That command is currently in a cooldown period. Please wait another {secondsRemaining} second(s) before trying again." :
-				$"Your command is currently in an active cooldown period. Please wait and try again later.";
+				$"The command '{commandName}' is currently in a cooldown period. Please wait another {secondsRemaining} second(s) before trying again." :
+				$"The command '{commandName}' is currently in an active cooldown period. Please wait and try again later.";
 
 			await chatService.SendWhisperAsync(username, message);
 		}
 
 		private Task ProcessUserJoinedAsync(IChatService chatService, ChatEventArgs e)
 		{
-			_logger.LogTrace($"[{GetInstant}] {e.UserName} joined {e.ServiceName} chat.");
+			_logger.LogTrace($"[{GetInstant}] {e.Username} joined {e.ServiceName} chat.");
 
 			return Task.CompletedTask;
 		}
 
 		private Task ProcessUserLeftAsync(IChatService chatService, ChatEventArgs e)
 		{
-			_logger.LogTrace($"[{GetInstant}] {e.UserName} has left {e.ServiceName} chat.");
+			_logger.LogTrace($"[{GetInstant}] {e.Username} has left {e.ServiceName} chat.");
 
 			return Task.CompletedTask;
 		}
@@ -178,8 +178,7 @@ namespace StreamTools.Chatbot
 			services.AddSingleton<IBasicCommand, ShoutoutCommand>();
 
 			#region Load Commands from Plugins
-
-			var pluginsPath = $"{AppDomain.CurrentDomain.BaseDirectory}/Plugins";
+			var pluginsPath = $@"{AppDomain.CurrentDomain.BaseDirectory}\Plugins";
 			var assemblies = Directory.GetFiles(pluginsPath, "*.dll", SearchOption.AllDirectories)
 				.Select(AssemblyLoadContext.Default.LoadFromAssemblyPath);
 

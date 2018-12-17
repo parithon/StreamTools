@@ -21,7 +21,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamTools.Chatbot", "Stre
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamTools.Core", "StreamTools.Core\StreamTools.Core.csproj", "{B0D3FACD-7ED5-4DC5-B8DB-1371C6FBE117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.ChatBot.Abstractions", "StreamTools.ChatBot.Abstractions\StreamTools.ChatBot.Abstractions.csproj", "{7BCDCA01-05E6-4951-A951-B298BF7B2B86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.Chatbot.Abstractions", "StreamTools.ChatBot.Abstractions\StreamTools.Chatbot.Abstractions.csproj", "{7BCDCA01-05E6-4951-A951-B298BF7B2B86}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.ConsoleTools", "StreamTools.ConsoleTools\StreamTools.ConsoleTools.csproj", "{FAB95183-70EF-4751-A9D4-A811AD969D6C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D} = {4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTools.Chatbot.Commands", "StreamTools.Chatbot.Commands\StreamTools.Chatbot.Commands.csproj", "{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +56,14 @@ Global
 		{7BCDCA01-05E6-4951-A951-B298BF7B2B86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BCDCA01-05E6-4951-A951-B298BF7B2B86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BCDCA01-05E6-4951-A951-B298BF7B2B86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAB95183-70EF-4751-A9D4-A811AD969D6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAB95183-70EF-4751-A9D4-A811AD969D6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAB95183-70EF-4751-A9D4-A811AD969D6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAB95183-70EF-4751-A9D4-A811AD969D6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FA81AD5-FB32-40EB-9CCD-54FEAF854E1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

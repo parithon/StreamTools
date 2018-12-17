@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\StreamTools.ChatBot.Abstractions\StreamTools.ChatBot.Abstractions.csproj" />
+    <ProjectReference Include="..\StreamTools.ChatBot.Abstractions\StreamTools.Chatbot.Abstractions.csproj" />
     <ProjectReference Include="..\StreamTools.Composition.Abstractions\StreamTools.Composition.Abstractions.csproj" />
     <ProjectReference Include="..\StreamTools.Core\StreamTools.Core.csproj" />
   </ItemGroup>

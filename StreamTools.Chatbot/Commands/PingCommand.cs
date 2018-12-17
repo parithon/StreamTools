@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using StreamTools.ChatBot.Abstractions;
-using StreamTools.Core;
 
 namespace StreamTools.Chatbot.Commands
 {
